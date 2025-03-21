@@ -1,0 +1,41 @@
+<sequence name="ProcessaPedido" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full">
+        <property name="mensagem" value="Pedido recebido: $body"/>
+    </log>
+    <call>
+        <endpoint>
+            <address uri="http://localhost:3000/validar-externo-simulado"/>
+        </endpoint>
+    </call>
+    <property name="valido" expression="json-eval($.valido)"/>
+    <filter source="$ctx:valido" regex="true">
+        <then>
+            <filter source="$body/valor" regex="^[1-9]\d{3,}$">
+                <then>
+                    <send>
+                        <endpoint>
+                            <address uri="http://localhost:3000/aprovar-manual"/>
+                        </endpoint>
+                    </send>
+                </then>
+                <else>
+                    <send>
+                        <endpoint>
+                            <address uri="http://localhost:3000/aprovar-automatico"/>
+                        </endpoint>
+                    </send>
+                </else>
+            </filter>
+        </then>
+        <else>
+            <log level="full">
+                <property name="mensagem" value="Validação externa falhou."/>
+            </log>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:3000/rejeitar-pedido"/>
+                </endpoint>
+            </send>
+        </else>
+    </filter>
+</sequence>
