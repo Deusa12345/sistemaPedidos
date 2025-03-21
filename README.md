@@ -1,4 +1,4 @@
-w# Sistema de Gestão de Pedidos Multiempresa
+# Sistema de Gestão de Pedidos Multiempresa
 Este sistema foi desenvolvido como parte do Trabalho Prático de Sistemas Distribuídos, com o objetivo de criar uma solução completa para a gestão de pedidos de aprovação em um ambiente multiempresa.
 
 
