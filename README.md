@@ -40,7 +40,7 @@ O sistema permite que empresas submetam pedidos de diversos tipos, como aquisiç
 1.  Clone o repositório:
     Na raiz do projeto:
     git clone <URL_DO_SEU_REPOSITORIO>
-    cd sistema-pedidos
+    cd sistemaPedidos
     
 2.  Instale as dependências do backend:
     ```bash
